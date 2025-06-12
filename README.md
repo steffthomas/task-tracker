@@ -38,11 +38,9 @@ Created and maintained by [Stefy Thomas](https://github.com/steffthomas)
 
 ### Mobile View
 
-| Task & Timer | Quotes & Footer |
-|--------------|-----------------|
-| ![Mobile 1](![WhatsApp Image 2025-06-12 at 20 18 38_f182c621](https://github.com/user-attachments/assets/efa87c9d-d0e7-46d0-9031-4005f839da14)
-) | ![Mobile 2](![WhatsApp Image 2025-06-12 at 20 18 38_445af5d6](https://github.com/user-attachments/assets/cf03af4b-f47c-43c7-bd2e-d6541dbd2a24)
-) |
+| Task & Timer                                      | Quotes & Footer                                   |
+|--------------------------------------------------|---------------------------------------------------|
+| ![Mobile 1](https://github.com/user-attachments/assets/efa87c9d-d0e7-46d0-9031-4005f839da14) | ![Mobile 2](https://github.com/user-attachments/assets/cf03af4b-f47c-43c7-bd2e-d6541dbd2a24) |
 
 ---
 
@@ -83,13 +81,6 @@ pip install -r requirements.txt
 python app.py
 Then open your browser and go to: http://localhost:10000
 ```
-task-tracker/
-├── app.py                  # Flask application
-├── todo.db                 # SQLite database
-├── requirements.txt        # Python dependencies
-├── templates/              # HTML templates
-├── static/                 # Static files (CSS/images)
-└── screenshots/            # Screenshots used in README
 
 👤 Author
 Stefy Thomas
