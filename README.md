@@ -82,12 +82,14 @@ python app.py
 Then open your browser and go to: http://localhost:10000
 ```
 
-👤 Author
-Stefy Thomas
+## 👤 Author
 
-GitHub: @steffthomas
+**Stefy Thomas**  
+- GitHub: [@steffthomas](https://github.com/steffthomas)  
+- LinkedIn: [stefy-thomas](https://www.linkedin.com/in/stefy-thomas/)
 
-LinkedIn: your-linkedin-url
+---
 
-📄 License
-This project is released under the MIT License.
+## 📄 License
+
+This project is released under the [MIT License](LICENSE).
