@@ -1,0 +1,99 @@
+# 📝 To-Do Task Tracker
+
+**To-Do Task Tracker** is a full-stack web application built with **Flask** that allows users to manage daily tasks efficiently.  
+It includes core **CRUD functionality** — users can **Create**, **Read**, **Update**, and **Delete** tasks in a streamlined interface.  
+
+The application also features:
+
+- A **task-specific timer** to help users track focused work sessions.
+- Integration with the **ZenQuotes API** to display a rotating set of motivational quotes.
+- A visually embedded **“Study With Me” video player** for a distraction-free workflow environment.
+
+Designed with a **mobile-first**, fully **responsive layout**, this project is suitable for both desktop and mobile use.  
+The backend uses **SQLite** as a lightweight database solution, and the entire app is deployed using **Render** for public access.
+
+This project demonstrates proficiency in:
+- Flask routing and templating
+- Frontend styling using Bootstrap
+- API integration
+- Session handling and environment configuration
+- Deployment of Python web apps
+
+Created and maintained by [Stefy Thomas](https://github.com/steffthomas)
+
+---
+
+## 🔗 Live Demo
+
+👉 [Open the app here](https://task-tracker-wtsr.onrender.com)
+
+---
+
+## 📸 Screenshots
+
+### Desktop View
+
+![Desktop Screenshot](screenshots/desktop.png)
+
+### Mobile View
+
+| Task & Timer | Quotes & Footer |
+|--------------|-----------------|
+| ![Mobile 1](screenshots/mobile-1.jpg) | ![Mobile 2](screenshots/mobile-2.jpg) |
+
+---
+
+## ✅ Features
+
+- Add, edit, and delete tasks
+- Start/stop timer for individual tasks
+- Display rotating motivational quotes (using ZenQuotes API)
+- Embedded “Study With Me” background video
+- Responsive layout for both desktop and mobile devices
+- Hosted on Render for public access
+
+---
+
+## 🧰 Tech Stack
+
+| Layer       | Technology         |
+|-------------|---------------------|
+| Backend     | Python, Flask        |
+| Frontend    | HTML, CSS, Bootstrap |
+| Database    | SQLite               |
+| Hosting     | Render               |
+| API         | [ZenQuotes.io](https://zenquotes.io) |
+
+---
+
+## 🚀 How to Run Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/steffthomas/task-tracker.git
+cd task-tracker
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+Then open your browser and go to: http://localhost:10000
+
+task-tracker/
+├── app.py                  # Flask application
+├── todo.db                 # SQLite database
+├── requirements.txt        # Python dependencies
+├── templates/              # HTML templates
+├── static/                 # Static files (CSS/images)
+└── screenshots/            # Screenshots used in README
+
+👤 Author
+Stefy Thomas
+
+GitHub: @steffthomas
+
+LinkedIn: your-linkedin-url
+
+📄 License
+This project is released under the MIT License.
