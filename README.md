@@ -33,13 +33,16 @@ Created and maintained by [Stefy Thomas](https://github.com/steffthomas)
 
 ### Desktop View
 
-![Desktop Screenshot](screenshots/desktop.png)
+![Desktop Screenshot](![Screenshot 2025-06-12 201739](https://github.com/user-attachments/assets/6b5d5286-555b-41ee-b83b-9e4b31c68436)
+)
 
 ### Mobile View
 
 | Task & Timer | Quotes & Footer |
 |--------------|-----------------|
-| ![Mobile 1](screenshots/mobile-1.jpg) | ![Mobile 2](screenshots/mobile-2.jpg) |
+| ![Mobile 1](![WhatsApp Image 2025-06-12 at 20 18 38_f182c621](https://github.com/user-attachments/assets/efa87c9d-d0e7-46d0-9031-4005f839da14)
+) | ![Mobile 2](![WhatsApp Image 2025-06-12 at 20 18 38_445af5d6](https://github.com/user-attachments/assets/cf03af4b-f47c-43c7-bd2e-d6541dbd2a24)
+) |
 
 ---
 
@@ -79,7 +82,7 @@ pip install -r requirements.txt
 # Run the application
 python app.py
 Then open your browser and go to: http://localhost:10000
-
+```
 task-tracker/
 ├── app.py                  # Flask application
 ├── todo.db                 # SQLite database
