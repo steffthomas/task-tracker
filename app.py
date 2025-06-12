@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect
+import requests
 import sqlite3
 import os
+import time
 
 
 app = Flask(__name__)
@@ -30,13 +32,50 @@ def init_db():
 # Call it at startup
 init_db()
 
+_cached_quotes = []
+_last_fetch_time = 0
+
+def get_random_quotes(n=3):
+    global _cached_quotes, _last_fetch_time
+    now = time.time()
+
+    # Refresh only every 5 minutes
+    if not _cached_quotes or now - _last_fetch_time > 300:
+        _cached_quotes = []
+        seen = set()
+
+        while len(_cached_quotes) < n:
+            try:
+                res = requests.get("https://zenquotes.io/api/random", timeout=3)
+                if res.status_code == 200:
+                    data = res.json()[0]
+                    quote = f'"{data["q"]}" — {data["a"]}'
+                    if quote not in seen:
+                        _cached_quotes.append(quote)
+                        seen.add(quote)
+                else:
+                    print("ZenQuotes API error:", res.status_code)
+                    break
+            except:
+                print("ZenQuotes failed.")
+                break
+
+        _last_fetch_time = now
+
+    # Fallback or pad if API failed
+    return _cached_quotes[:n] if _cached_quotes else [
+        "Believe in yourself.",
+        "You’ve got this.",
+        "Keep going. You're doing great!"
+    ]
 
 @app.route('/')
 def index():
     conn = get_db_connection()
     tasks = conn.execute('SELECT * FROM tasks').fetchall()
     conn.close()
-    return render_template('index.html', tasks=tasks)
+    random_quotes = get_random_quotes()
+    return render_template('index.html', tasks=tasks, quotes=random_quotes)
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -75,4 +114,5 @@ def edit_task(task_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)

@@ -5,59 +5,157 @@
     <title>To-Do App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        let startTime = null;
+        let interval = null;
+
+        function startTimer(button) {
+            const taskId = button.getAttribute("data-taskid");
+            const taskName = button.getAttribute("data-taskname");
+            document.getElementById("task-name-display").innerText = taskName;
+            clearInterval(interval);
+            startTime = Date.now();
+
+            interval = setInterval(() => {
+                let elapsed = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer-display").innerText = formatTime(elapsed);
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(interval);
+            interval = null;
+            document.getElementById("task-name-display").innerText = "None";
+        }
+
+        function formatTime(seconds) {
+            const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const s = String(seconds % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+    </script>
+
 
 </head>
 
-<body style="background-color: #f3b6cd;">
-    <div class="container-fluid mt-5  px-3">
-        <div class="row">
-            <!-- 📝 To-do List Section -->
-            <div class="col-lg-7 col-md-12 mb-4">
-                <h1 class="text-center p-3 rounded"
-                    style="background-color:#f8b1cc; border-color: #f1667b; color: black;">📝 My To-Do List</h1>
+<body style="background-color:#fcb6b6;display: flex; flex-direction: column; min-height: 100vh;">
+    <main style="flex: 1;">
+        <div class="container-fluid mt-5  px-3">
+            <div class="row">
+                <!-- 📝 To-do List Section -->
+                <div class="col-lg-7 col-md-12 mb-4">
+                    <h1 class="text-center p-3 rounded"
+                        style="background-color:#f6b9b9;; border-color: #f1667b; color: black;">📝 To-Do List</h1>
 
-                <form method="POST" action="/add" class="row g-2 mb-4">
-                    <div class="col-9">
-                        <input type="text" name="title" class="form-control me-2"
-                            style="background-color: #d090a3; border-radius: 10px; margin-bottom: 10px;"
-                            placeholder="lets get it done !!!" required>
-                    </div>
-                    <div class="col-3">
-                        <button type="submit"
-                            style="background-color: #ed4d67; color: rgb(250, 205, 205); border-radius: 7px; margin-bottom: 10px;"
-                            class="btn btn-sm me-2">Add</button>
-                    </div>
-                </form>
+                    <form method="POST" action="/add" class="row g-2 mb-4">
+                        <div class="col-9">
+                            <input type="text" name="title" class="form-control me-2"
+                                style="background-color: #fae5e5; border-radius: 10px; margin-bottom: 10px;"
+                                placeholder="lets get it done !!!" required>
+                        </div>
+                        <div class="col-3">
+                            <button type="submit"
+                                style="background-color: #f97171; color: rgb(250, 205, 205); border-radius: 7px; margin-bottom: 10px;"
+                                class="btn btn-sm me-2">Add</button>
+                        </div>
+                    </form>
 
-                <ul class="list-group">
-                    {% for task in tasks %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center"
-                        style="background-color: #f7d2dd; border-radius: 14px; margin-bottom: 10px;">
-                        {{ task[1] }}
-                        <div class="d-flex flex-wrap gap-2">
-                            <a href="/edit/{{ task[0] }}" style="background-color:  #f76880; color: rgb(247, 188, 188);"
-                                class="btn btn-sm me-2">Edit</a>
-                            <a href="/delete/{{ task[0] }}"
-                                style="background-color: #f76880; color: rgb(247, 188, 188);"
-                                class="btn btn-sm me-2">Done</a>
+                    <ul class="list-group">
+                        {% for task in tasks %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center"
+                            style="background-color: #fae5e5; border-radius: 14px; margin-bottom: 10px;">
+                            {{ task[1] }}
+                            <div class="d-flex flex-wrap gap-2">
+                                <button onclick="startTimer(this)" data-taskid="{{ task[0] }}"
+                                    data-taskname="{{ task[1] }}" class="btn btn-sm"
+                                    style="background-color:  #f97171; color: rgb(251, 216, 216);">
+                                    Start
+                                </button>
+                                <a href="/edit/{{ task[0] }}"
+                                    style="background-color:   #f97171; color: rgb(251, 216, 216);"
+                                    class="btn btn-sm me-2">Edit</a>
+                                <a href="/delete/{{ task[0] }}"
+                                    style="background-color:  #f97171; color: rgb(251, 216, 216);"
+                                    class="btn btn-sm me-2">Done</a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- 🎥 YouTube Video Section -->
+                <div class="col-lg-5 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">🎥 Study With Me</h5>
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/cu959m5z07Q?autoplay=1&mute=1&rel=0"
+                                    allow="autoplay" title="Study With Me" allowfullscreen frameborder="0"></iframe>
+                            </div>
                         </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- 🎥 YouTube Video Section -->
-            <div class="col-lg-5 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">🎥 Study With Me</h5>
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/cu959m5z07Q?autoplay=1&mute=1&rel=0" allow="autoplay" title="Study With Me" allowfullscreen frameborder="0"></iframe>
+                    </div>
+                </div>
+                <!-- Compact Timer -->
+                <!-- Compact Timer aligned right -->
+                <!-- Centered and Slightly Larger Timer under Video -->
+                <!-- ⏱️ Timer + 💬 Quotes Side by Side -->
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch mt-3 gap-3">
+
+                    <!-- Timer -->
+                    <div class="p-2 flex-fill"
+                        style="background: linear-gradient(135deg, #f95858, #fd8d8d); border-radius: 20px; box-shadow: 6px 8px 20px rgba(124, 0, 0, 0.3); max-width: 600px;">
+
+                        <div
+                            style="background-color: #fae5e5; padding: 14px; border: 1px solid #fbbbbb; border-radius: 12px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.08); max-width: 100%;">
+
+                            <div style="font-size: 1rem; color: #333;">⏱️ LET'S START NOW :</div>
+                            <div id="task-name-display" style="font-weight: bold; font-size: 1.3rem; color: #d81b60;">;)
+                            </div>
+
+                            <div id="timer-display"
+                                style="font-size: 2.3rem; font-weight: bold; margin-top: 10px; color: #000;">
+                                00:00:00
+                            </div>
+
+                            <button class="btn mt-3 px-4 py-2"
+                                style="background-color: #d81b60; color: white; border: none; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);"
+                                onclick="stopTimer()">Stop</button>
                         </div>
+                    </div>
+
+
+
+                    <!-- Quotes beside timer -->
+                    <div class="flex-fill">
+                        <h5 class="mb-2"
+                            style="font-size: 1.5rem; font-weight: 700; color: #9d3737; text-transform: capitalize; letter-spacing: 0.5px;">
+                            💬DAILY DOSE OF WISDOM</h5>
+                        {% for quote in quotes %}
+                        <div class="p-3 mb-2"
+                            style="background-color: #fae5e5; border-left: 5px solid #f37373; border-radius: 10px;">
+                            <small class="text-muted">{{ quote }}</small>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </main>
 </body>
+<!-- 👣 Footer -->
+<footer class="px-4 py-2"
+    style="background-color: #fcb6b6; font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+
+    <!-- Centered text block -->
+    <div class="text-center w-100" style="font-weight: 500; color: #9d3737">
+        👩‍💻 Coded with 💖 by <a href="https://github.com/steffthomas" target="_blank"
+            style="color:#9d3737; text-decoration: underline;">Stefy Thomas</a>
+    </div>
+
+    <!-- Social Icons Right aligned -->
+
+</footer>
+
 
 </html>
