@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">✏️ Edit Task</h2>
+        <form method="POST" class="card p-4 shadow-sm">
+            <div class="mb-3">
+                <label class="form-label">Task Title</label>
+                <input type="text" name="title" class="form-control" value="{{ task.title }}" required>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="/" class="btn btn-secondary">← Back</a>
+                <button type="submit" class="btn btn-success">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
